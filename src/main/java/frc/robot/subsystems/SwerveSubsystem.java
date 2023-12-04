@@ -98,15 +98,6 @@ public class SwerveSubsystem extends SubsystemBase{
         this.backRight.setAutoDesiredState(state[3]);
     }
 
-    public SwerveModuleState[] getModuleState() {
-        return new SwerveModuleState[] {
-            this.frontLeft.getState(),
-            this.frontRight.getState(),
-            this.backLeft.getState(),
-            this.backRight.getState()
-        };
-    }
-
     public SwerveModulePosition[] getModulePosition() {
         return new SwerveModulePosition[] {
             this.frontLeft.getPosition(),

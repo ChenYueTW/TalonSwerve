@@ -5,16 +5,16 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 
 public final class Constants {
 	public static final class SwerveConstants {
-		public static final double TRACK_WIDTH = 0.62; // 寬
-		public static final double WHEEL_BASE = 0.62; // 長
+		public static final double TRACK_WIDTH = 0.61; // 寬
+		public static final double WHEEL_BASE = 0.61; // 長
 		public static final double WHEEL_RADIUS = 0.0508; // 輪子半徑
 		
 		public static final double PHYSICAL_MAX_SPEED_METERS_PER_SECOND = 3.0; // 最大速度m/s
 		public static final double PHYSICAL_MAX_ACCELERATION_METERS_PER_SECONE = 3.0; // 最大加速度m/s^2
 		public static final double DRIVE_GEAR_RATIO = 57.0 / 7.0; // 齒輪比
 
-		public static final double DRIVE_VELOCITY_CONVERSION_FACTOR = WHEEL_RADIUS / DRIVE_GEAR_RATIO * Math.PI;
-		public static final double DRIVE_POSITION_CONVERSION_FACTOR = WHEEL_RADIUS / DRIVE_GEAR_RATIO / 60 * Math.PI;
+		public static final double DRIVE_VELOCITY_CONVERSION_FACTOR = (1.0 / DRIVE_GEAR_RATIO / 2048) * WHEEL_RADIUS * Math.PI * 10;
+		public static final double DRIVE_POSITION_CONVERSION_FACTOR = (1.0 / DRIVE_GEAR_RATIO / 2048) * WHEEL_RADIUS * Math.PI;
 	}
 	
 	public static final class MotorReverse {
