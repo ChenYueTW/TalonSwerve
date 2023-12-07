@@ -8,7 +8,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.DeviceId.Neo;
 import frc.robot.DeviceId.Encoder;
@@ -62,7 +62,7 @@ public class SwerveSubsystem extends SubsystemBase{
             EncoderOffset.BACK_RIGHT,
             "backRight"
         );
-        this.gyro = new AHRS(SerialPort.Port.kUSB);
+        this.gyro = new AHRS(SPI.Port.kMXP);
         this.odometry = new SwerveDriveOdometry(
             Constants.swerveDriveKinematics, this.gyro.getRotation2d(), this.getModulePosition()
         );

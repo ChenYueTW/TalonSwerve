@@ -21,9 +21,9 @@ public class SwerveDriveCmd extends CommandBase {
 
 	@Override
 	public void execute() {
-		double xSpeed = -MathUtil.applyDeadband(this.controller.getLeftY(), Constants.DEAD_BAND) * Constants.MAX_SPEED;
-		double ySpeed = -MathUtil.applyDeadband(this.controller.getLeftX(), Constants.DEAD_BAND) * Constants.MAX_SPEED;
-		double rotation = -MathUtil.applyDeadband(this.controller.getRightX(), Constants.DEAD_BAND) * Constants.MAX_ANGULAR_SPEED;
+		double xSpeed = MathUtil.applyDeadband(this.controller.getLeftY(), Constants.DEAD_BAND) * Constants.MAX_SPEED;
+		double ySpeed = MathUtil.applyDeadband(this.controller.getLeftX(), Constants.DEAD_BAND) * Constants.MAX_SPEED;
+		double rotation = MathUtil.applyDeadband(this.controller.getRightX(), Constants.DEAD_BAND) * Constants.MAX_ANGULAR_SPEED;
 
 		this.swerveSubsystem.driveSwerve(xSpeed, ySpeed, rotation, true);
 	}
