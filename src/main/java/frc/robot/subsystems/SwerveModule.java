@@ -59,33 +59,17 @@ public class SwerveModule implements IDashboardProvider{
         return this.turnEncoder.getAbsolutePosition() - this.turningEncoderOffset;
     }
 
-    public double getDriveVelocity() {
-        return this.driveMotor.getVelocity();
-    }
-
-    public double getDrivePosition() {
-        return this.driveMotor.getPosition();
-    }
-
-    public double getTurnVelocity() {
-        return this.turnMotor.getVelocity();
-    }
-
-    public double getTurnPosition() {
-        return this.turnMotor.getPosition();
-    }
-
     public SwerveModuleState getState() {
         return new SwerveModuleState(
-            this.getDriveVelocity(),
-            Rotation2d.fromDegrees(this.getTurnPosition())
+            this.driveMotor.getVelocity(),
+            Rotation2d.fromDegrees(this.turnMotor.getPosition())
         );
     }
 
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(
-            this.getDrivePosition(),
-            Rotation2d.fromDegrees(this.getTurnPosition())
+            this.driveMotor.getPosition(),
+            Rotation2d.fromDegrees(this.turnMotor.getPosition())
         );
     }
 
@@ -97,7 +81,7 @@ public class SwerveModule implements IDashboardProvider{
         SwerveModuleState state = SwerveModuleState.optimize(desiredState, this.getState().angle);
 
         this.driveOutput = state.speedMetersPerSecond / SwerveConstants.PHYSICAL_MAX_SPEED_METERS_PER_SECOND;
-        this.turnOutput = this.turnPidController.calculate(this.getTurnPosition(), state.angle.getDegrees());
+        this.turnOutput = this.turnPidController.calculate(this.turnMotor.getPosition(), state.angle.getDegrees());
 
         this.driveMotor.setSpeed(this.driveOutput);
         this.turnMotor.setSpeed(this.turnOutput);
@@ -111,7 +95,7 @@ public class SwerveModule implements IDashboardProvider{
         SwerveModuleState state = SwerveModuleState.optimize(desiredState, this.getState().angle);
 
         this.driveOutput = state.speedMetersPerSecond;
-        this.turnOutput = this.turnPidController.calculate(this.getState().angle.getDegrees(), state.angle.getDegrees());
+        this.turnOutput = this.turnPidController.calculate(this.turnMotor.getPosition(), state.angle.getDegrees());
 
         this.driveMotor.setSpeed(this.driveOutput);
         this.turnMotor.setSpeed(this.turnOutput);
@@ -119,10 +103,10 @@ public class SwerveModule implements IDashboardProvider{
 
     @Override
     public void putDashboard() {
-        SmartDashboard.putNumber(this.motorName + " DrivePosition", this.getDrivePosition());
-        SmartDashboard.putNumber(this.motorName + " DriveVelocity", this.getDriveVelocity());
-        SmartDashboard.putNumber(this.motorName + " TurnPosition", this.getTurnPosition());
-        SmartDashboard.putNumber(this.motorName + " TurnVelocity", this.getTurnVelocity());
+        SmartDashboard.putNumber(this.motorName + " DrivePosition", this.driveMotor.getPosition());
+        SmartDashboard.putNumber(this.motorName + " DriveVelocity", this.driveMotor.getVelocity());
+        SmartDashboard.putNumber(this.motorName + " TurnPosition", this.getTurningEncoderPosition());
+        SmartDashboard.putNumber(this.motorName + " TurnVelocity", this.turnEncoder.getVelocity());
         SmartDashboard.putNumber(this.motorName + " DriveMotor", this.driveOutput);
         SmartDashboard.putNumber(this.motorName + " TurnMotor", this.turnOutput);
     }
