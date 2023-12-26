@@ -20,12 +20,26 @@ public class LazyTalon extends TalonFX{
         this.gearRatio = gearRatio;
     }
 
+    public void setPosition(double getAbsolutePosition) {
+        double rotaion = Units.degreesToRotations(getAbsolutePosition);
+        this.setSelectedSensorPosition(rotaion * (2048.0 / this.gearRatio));
+    }
+
     public double getVelocity() {
         return this.getSelectedSensorVelocity() * this.gearRatio;
     }
-
+    
     public double getPosition() {
+        return this.getSelectedSensorPosition() * this.gearRatio;
+    }
+
+    public double getTurnPosition() {
         double degrees = Units.rotationsToDegrees(this.getSelectedSensorPosition());
+        return degrees / (2048.0 / this.gearRatio);
+    }
+
+    public double getAbsolutePosition(double absolutePosition) {
+        double degrees = Units.rotationsToDegrees(absolutePosition);
         return degrees / (2048.0 / this.gearRatio);
     }
 

@@ -111,6 +111,10 @@ public class SwerveSubsystem extends SubsystemBase{
         return this.odometry.getPoseMeters();
     }
 
+    public void resetGyro() {
+        this.gyro.reset();
+    }
+
     public void stopModules() {
         this.frontLeft.stop();
         this.frontRight.stop();

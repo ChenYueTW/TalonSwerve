@@ -50,6 +50,24 @@ public final class Constants {
 		public static final double PHYSICAL_MAX_ACCELERATION_METERS_PER_SECONE = 0.5; // 最大加速度m/s^2
 	}
 
+	public static final class LimelightConstants {
+		public static final double MOUNT_ANGLE_DEG = 0.0;
+		public static final double LENS_HEIGHT_METERS = 0.42; // distance from the center of the Limelight lens to the floor
+		public static final double GOAL_HEIGHT_METERS = 0.74; // distance from the target to the floor
+		public static final double HORIZONTAL_OFFSET_METERS = 0;
+		public static final double VERTICAL_MAX_SPEED = 1.3;
+		public static final double HORIZONTAL_MAX_SPEED = 2.6;
+		public static final boolean gyroField = false;
+	}
+
+	public static final class LimelightCamera {
+		public static final double[] cameraPose = {
+			-1, 1, -0.99, 1
+		};
+		public static final double ledMode = 3; // 1-off 2-blink 3-on
+		public static final double camMode = 0; // 0-Vision 1-Driver
+	}
+
     public static final double DEAD_BAND = 0.05;
 	public static final double MAX_SPEED = 0.8;
 	public static final double MAX_ANGULAR_SPEED = 1.3;

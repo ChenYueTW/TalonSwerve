@@ -25,6 +25,10 @@ public class SwerveDriveCmd extends CommandBase {
 		double ySpeed = -MathUtil.applyDeadband(this.controller.getLeftY(), Constants.DEAD_BAND) * Constants.MAX_SPEED;
 		double rotation = -MathUtil.applyDeadband(this.controller.getRightX(), Constants.DEAD_BAND) * Constants.MAX_ANGULAR_SPEED;
 
+		if (this.controller.getAButton()) {
+			this.swerveSubsystem.resetGyro();
+		}
+
 		this.swerveSubsystem.driveSwerve(xSpeed, ySpeed, rotation, Constants.gyroField);
 	}
 
